@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            overflow: hidden;
+            padding: 0 20px;
+        }
+        .heading {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        h1 {
+            color: #444;
+            margin-bottom: 20px;
+        }
+        .left, .right {
+            padding: 20px;
+            background: #fff;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .left {
+            width: 60%;
+            float: left;
+        }
+        .right {
+            width: 35%;
+            float: right;
+        }
+        .billing-details label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .billing-details input[type="text"],
+        .billing-details select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        .billing-details input[type="text"]:focus,
+        .billing-details select:focus {
+            border-color: #007bff;
+        }
+        .required {
+            color: red;
+        }
+        .box {
+            border: 1px solid #e6e6e6;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .box p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .subtotal-right {
+            float: right;
+            margin-top: -30px;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: #e6e6e6;
+            margin: 10px 0;
+        }
+        .payment {
+            margin-top: 20px;
+        }
+        .upi {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        input[type="submit"] {
+            background: #04d39f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background: #02a37a;
+        }
+        @media (max-width: 768px) {
+            .left, .right {
+                width: 100%;
+                float: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>Checkout</h1>
+        </div>   
+        <div class="left">
+            <h1>Billing Details</h1>
+            <form class="billing-details">
+                <label for="fname">First name <span class="required">*</span></label>
+                <input type="text" id="fname" name="fname">
+                <label for="lname">Last name <span class="required">*</span></label>
+                <input type="text" id="lname" name="lname">
+                <label for="company">Company Name (Optional)</label>
+                <input type="text" id="company" name="company">
+                <label for="country">Country <span class="required">*</span></label>
+                <select id="country" name="country">
+                    <option value="" selected disabled>Select a country</option>
+                    <!-- List of countries -->
+                </select>
+                <label for="street">Street Address <span class="required">*</span></label>
+                <input type="text" id="street" name="street">
+                <label for="city">Town/City <span class="required">*</span></label>
+                <input type="text" id="city" name="city">
+                <label for="state">State <span class="required">*</span></label>
+                <input type="text" id="state" name="state">
+                <label for="zip">Zip Code <span class="required">*</span></label>
+                <input type="text" id="zip" name="zip">
+                <label for="phone">Phone <span class="required">*</span></label>
+                <input type="text" id="phone" name="phone">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="text" id="email" name="email">
+            </form>
+        </div>
+
+        <div class="right">
+            <h1>Your Order</h1>
+            <div class="box">
+                <p class="product-left">Product</p>
+                <p class="subtotal-right">Subtotal</p>
+                <hr>
+                <div class="order-item">
+                    <% for( let index = 0; index < item.length; index++ ) { %>
+                    <p class="product-left"><%=item[index].name%> - <%=cart[index].size%>  × <%=cart[index].quantity%></p>
+                    <p class="subtotal-right">Rs.<%=item[index].price%></p>
+                    <% } %>
+                </div>
+                <hr>
+                <div class="order-summary">
+                    <p class="product-left">Subtotal</p>
+                    <p class="subtotal-right">Rs.<%=total%></p>
+                    <hr>
+                    <p class="product-left">Shipping</p>
+                    <p class="subtotal-right">Flat rate</p>
+                    <hr>
+                    <p class="product-left">Total</p>
+                    <p class="subtotal-right">Rs.<%= total %></p>
+                </div>
+                <hr>
+                <h2 class="payment">Payment Method</h2>
+                <form action="/action_page.php" class="payment-options">
+                    <input type="radio" id="bank" name="payment_method" value="bank">
+                    <label for="bank"> Direct bank transfer</label><br>
+                    <input type="radio" id="cod" name="payment_method" value="cod">
+                    <label for="cod">Cash on delivery</label><br>
+                    <input type="radio" id="upi" name="payment_method" value="upi">
+                    <label for="upi">UPI</label><br>
+                    <img src="https://cdn.zeebiz.com/sites/default/files/2024/01/03/274966-upigpay.jpg" alt="UPI" class="upi">
+                    <br>
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

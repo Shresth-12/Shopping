@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+.icons {
+    position: relative;
+    height: 250px;
+    width: 100vw; /* Full viewport width */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6) url("https://ciyashop.potenzaglobalsolutions.com/wp-content/uploads/2021/03/cate-men-img-02.jpg") no-repeat center center/cover;
+    z-index: 1; /* Set the overlay z-index */
+}
+
+.content {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    z-index: 2; /* Ensure content is above the overlay */
+}
+        .men {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .men img {
+            width: 50px;
+            height: 50px;
+        }
+        .men h3 {
+            margin-left: 10px;
+            color: white;
+        }
+        .men h3:hover {
+            color: #04d39f;
+            cursor: pointer;
+        }
+        .men p {
+            position: relative;
+            left: -30px;
+            margin-top: 40px;
+            color: white;
+        }
+
+        .products-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 23%;
+            background-color: #fff;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info button {
+            font-size: 15px;
+            margin-bottom: 10px;
+            background-color: transparent;
+            border: 2px solid transparent;
+            color: black;
+        }
+        .product-info button:hover {
+            color: #04d39f;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            font-size: 16px;
+            color: #f5a623;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #ddd;
+            margin-bottom: 0px;
+        }
+
+        .product-actions img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .add-to-cart {
+            background-color: #04d39f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .add-to-cart:hover {
+            background-color: #02a37a;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #04d39f;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .wishlist {
+            background-color: transparent;
+            border: 2px solid transparent;
+        }
+        .wish-cart {
+            display: flex;
+        }
+        .button{
+            background-color: transparent;
+            color: white;
+            border: 2px solid transparent;
+            font-size: 20px;
+            font-weight: 500;
+        }
+        .button:hover{
+            color: #04d39f;
+            cursor: pointer;
+        }
+
+        @media only screen and (max-width: 767px) {
+          *{
+            padding: 0;
+            margin: 0;
+          }
+            .products-grid {
+        flex-direction: column;
+        gap: 40px;
+        padding: 10px;
+        margin-top: -200px;
+    }
+
+    .product-card {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .product-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .wish-cart {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.wishlist {
+    background-color: transparent;
+    border: 2px solid transparent;
+    padding: 5px; /* Adjust padding to make button smaller */
+}
+
+.wish-cart img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px; /* Add margin between the buttons */
+    cursor: pointer;
+}
+
+        
+        }
+    </style>
+</head>
+<body>
+        <%- include("partials/header.ejs") %>
+
+    <div class="icons">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="men">
+                <img src="https://ciyashop.potenzaglobalsolutions.com/wp-content/uploads/2021/03/cats-06.png" alt="" class="menimage"> 
+                <form action="/product">
+                <button class="button" name="category" value="Men">Men <br> <%= mn %> products</button>
+                </form>
+            </div>
+            <div class="men">
+                <img src="https://ciyashop.potenzaglobalsolutions.com/wp-content/uploads/2021/03/cats-05.png" alt="" class="menimage"> 
+                <form action="/product">
+                    <button class="button" name="category" value="Women">Women <br> <%= won %> products</button>
+                    </form>
+            </div>
+            <div class="men">
+                <img src="https://ciyashop.potenzaglobalsolutions.com/wp-content/uploads/2021/03/cats-02.png" alt="" class="menimage"> 
+                <form action="/product">
+                    <button class="button" name="category" value="Kids">Kids <br> <%= kn %> products</button>
+                    </form>
+            </div>
+            <div class="men">
+                <img src="images/icons8-footwear-64.png" alt="" class="menimage"> 
+                <form action="/product">
+                    <button class="button" name="category" value="Footwear">Footwear <br> <%= fn %> products</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="products-grid">
+        <% for( let index = 0; index < item.length; index++ ) { %>
+        <div class="product-card">
+            <img src="<%= item[index].image %>" alt="Product Image" class="product-image">
+            <div class="product-info">
+                <p><%= item[index].category %></p>
+                <form action="/productinfo" method="post">
+                    <button name="aboutproduct" value="<%= item[index].id %>"><%= item[index].name %></button>
+                </form>
+                <br>
+                <p class="product-price">Rs.<%= item[index].price %></p>
+                <% for (let i = 1; i <= 5; i++) { %>
+                    <span class="fa fa-star <%= i <= item[index].rating ? 'checked' : '' %>"></span>
+                <% } %>
+            </div>
+            <div class="product-actions">
+                <form action="/addtocart" method="post">
+                    <button class="add-to-cart" name="addtocart" value="<%= item[index].id %>">ADD TO CART</button>
+                </form>
+                <div class="wish-cart">
+                    <form action="/addtowishlist" method="post">
+                        <button class="wishlist" name="addtowishlist" value="<%= item[index].id %>"><img src="/images/heart.png" alt="Wishlist"></button>
+                    </form>
+                    <img src="/images/grocery-store.png" alt="Share">
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+
+    <%- include("partials/footer.ejs") %>
+</body>
+</html>

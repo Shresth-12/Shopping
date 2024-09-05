@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+
+        .heading {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-head {
+            display: flex;
+        }
+
+        .product {
+            margin-left: 350px;
+        }
+
+        .cart-card {
+            margin-top: 50px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .price {
+            margin-left: 250px;
+        }
+
+        .quantity {
+            margin-left: 150px;
+        }
+
+        .subtotal {
+            margin-left: 120px;
+        }
+
+        .cart-logo {
+            width: 20px;
+            height: 20px;
+            margin-left: 50px;
+            margin-top: 60px;
+        }
+
+        .cart-product {
+            margin-top: 50px;
+            display: flex;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-img {
+            height: 150px;
+            margin-left: 50px;
+            border-radius: 10px;
+        }
+
+        .product-detail {
+            margin-left: 50px;
+            margin-top: 60px;
+        }
+
+        .product-price {
+            margin-left: 100px;
+            margin-top: 60px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 130px;
+            margin-top: -10px;
+        }
+
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+            font-size: 18px;
+        }
+
+        .quantity-controls input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            pointer-events: none;
+        }
+        
+        .product-subtotal {
+            margin-top: 60px;
+            margin-left: 100px;
+        }
+        .product-img img{
+            width: 400px;
+            margin-top: 45px;
+            margin-left: 85px;
+        }
+        .product-img{
+            display: flex;
+        }
+        .product-details{
+            margin-top: 75px;
+            margin-left: 80px;
+        }
+        .product-rating{
+            margin-left: 10px;
+        }
+        .product-price{
+            margin-left: 15px;
+            margin-top: 35px;
+            color: #04d39f;
+        }
+        .product-description{
+            width: 800px;
+            margin-top: 20px;
+            margin-left: 20px;
+            color: grey;
+        }
+
+        /* Style the modal */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1; 
+            padding-top: 60px; 
+            left: 0;
+            top: 0;
+            width: 100%; 
+            height: 100%; 
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            margin-top: 20px;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto; 
+            padding: 20px;
+            border: 1px solid #888;
+            width: 90%; 
+            max-width: 1000px; /* Ensure the modal content does not affect the navbar */
+        }
+
+        /* Close button */
+        .closeBtn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .closeBtn:hover,
+        .closeBtn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Improved styling for the size chart button */
+        #sizeChartBtn {
+            margin-top: 20px;
+            padding: 5px 10px;
+            font-size: 14px;
+            background-color: #ffffff;
+            color: #696060;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            display: block;
+            text-align: center;
+            margin-left: 20px;
+            margin-right: auto;
+            margin-top: 20px;
+            width: fit-content;
+            border: 2px solid grey;
+        }
+
+        #sizeChartBtn:hover {
+            background-color: #03b989;
+            transform: scale(1.05);
+        }
+
+        /* Ensure the image inside the modal scales properly */
+        .modal-content img {
+            width: 90%;
+            height: auto;
+        }
+        .sizeoptions{
+            margin-top: 45px;
+            display: flex;
+            margin-left: 10px;
+        }
+        .sizeoptions button{
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid grey;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-left: 10px;
+        }
+        .leftbutton{
+            margin-left: 30px;
+        }
+        .sizeoptions button:hover,
+        .sizeoptions  button.clicked {
+            background-color: #04d39f;
+             transform: scale(1.05); 
+        }
+
+        .add-to-cart {
+            background-color: #04d39f;
+            color: #fff;
+            padding: 5px 10px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border: 2px solid transparent;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        .add-to-cart:hover {
+            background-color: #02a37a;
+        }
+
+       /* Improved styling for the wishlist button */
+.wishlist {
+    background-color: transparent;
+    border: 2px solid grey;
+    padding: 5px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.wishlist img {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    left: -43px;
+    top: -20px;
+}
+
+.wishlist:hover {
+    background-color: #04d39f;
+    transform: scale(1.05);
+}
+
+.product-img{
+    margin-bottom: 50px;;
+}
+
+.fa-star {
+    font-size: 20px; /* Adjust as needed */
+    color: #ccc; /* Color for empty stars */
+}
+
+.fa-star.checked {
+    color: #ffcc00; /* Color for filled stars */
+}
+        
+@media only screen and (max-width: 767px) {
+    .product-img {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px; /* Adjust as needed */
+    }
+    
+    .product-img img {
+        width: 80%; /* Adjust as needed */
+        margin: 0 auto;
+    }
+    
+    .product-details {
+        margin: 20px 0; /* Adjust as needed */
+        text-align: center;
+    }
+    
+    .product-description {
+        width: 90%; /* Adjust as needed */
+        margin: 10px auto; /* Adjust as needed */
+    }
+    
+    .sizeoptions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .sizeoptions button {
+        margin: 10px 0; /* Adjust as needed */
+    }
+
+    .add-to-cart, .wishlist {
+        margin: 10px auto; /* Adjust as needed */
+        width: 90%; /* Adjust as needed */
+        text-align: center;
+    }
+
+    .wishlist {
+        margin-top: 15px;
+    }
+
+    .quantity-controls {
+        margin: 10px auto;
+        flex-direction: column;
+    }
+
+    .quantity-controls input,
+    .quantity-controls button {
+        margin: 5px 0; /* Adjust as needed */
+        width: 50px; /* Adjust as needed */
+    }
+
+    .cart-img {
+        height: 100px;
+        margin-left: 0;
+    }
+
+    .cart-product {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        margin-top: 20px;
+    }
+
+    .product-detail, .product-price, .product-subtotal {
+        margin: 10px 0;
+    }
+
+    .cart-logo {
+        margin: 20px auto; /* Adjust as needed */
+        display: block;
+    }
+
+    .modal-content {
+        width: 95%;
+    }
+    #sizeChartBtn{
+        margin-top: 40px;
+        margin-left: 140px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <div class="product-img">
+        <img src="<%= item[0].image %>" alt="">
+        <div class="product-details">
+            <h1><%= item[0].name %></h1>
+            <br>
+            <% for (let i = 1; i <= 5; i++) { %>
+                <span class="fa fa-star <%= i <= item[0].rating ? 'checked' : '' %>"></span>
+            <% } %>
+            <h2 class="product-price">Rs.<%= item[0].price %></h2>
+            <p class="product-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptatum commodi soluta totam fugit tempore nihil cumque laboriosam consectetur reiciendis quae consequatur, velit officia fugiat possimus ut quia asperiores. Molestiae, architecto nihil repellat sed sapiente eaque odio! Quisquam eaque accusamus molestiae perspiciatis reprehenderit voluptatum labore hic dolorum cumque quia, eum pariatur, adipisci consequatur. Tenetur cumque ea aliquid eum, veritatis, cum ratione, voluptatibus omnis minus ipsum odio saepe. Debitis quisquam ea, obcaecati vel minus libero quia!</p>
+            <button id="sizeChartBtn">Show Size Chart</button>
+            <!-- <div class="sizeoptions">
+                <button class="leftbutton">L</button>
+                <button class="size-button">M</button>
+                <button class="size-button">S</button>
+                <button class="size-button">XL</button>
+                <button class="size-button">XS</button>
+            </div> -->
+            <div class="add">
+                <form action="/addtocart" method="post">
+                <button href="#" class="add-to-cart" name="addtocart" value="<%= item[0].id %>">ADD TO CART</button>
+                </form>
+                <button class="wishlist" name="addtowishlist" value="<%= item[0].id %>"><img src="/images/heart.png" alt="Wishlist"></button>
+            </form>
+            </div>
+            <div class="quan-cart"></div>
+        </div>
+
+        <div id="sizeChartModal" class="modal">
+            <div class="modal-content">
+                <span class="closeBtn">&times;</span>
+                <img src="https://ciyashop.potenzaglobalsolutions.com/wp-content/uploads/2017/12/size-guide.jpg" alt="Size Chart">
+            </div>
+        </div>
+    </div>
+    <form action="/addtowishlist" method="post">
+       
+    <%- include("partials/footer.ejs") %>
+    <script>
+        // Get the modal
+        var modal = document.getElementById("sizeChartModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("sizeChartBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("closeBtn")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const buttons = document.querySelectorAll('.sizeoptions button');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => btn.classList.remove('clicked')); // Remove 'clicked' class from all buttons
+                    button.classList.add('clicked'); // Add 'clicked' class to the clicked button
+                });
+            });
+        });
+    </script>
+</body>
+</html>

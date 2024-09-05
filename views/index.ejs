@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Slider styles */
+        .slider {
+            width: 90%;
+            overflow: hidden;
+            margin-top: 20px;
+            /* Adjust spacing as needed */
+            margin-bottom: 20px;
+            /* Add bottom margin */
+            position: relative;
+            left: 5%;
+        }
+
+        .slide-container {
+            display: flex;
+            gap: 15px;
+            /* Gap between slides */
+            transition: transform 0.5s ease-in-out;
+            /* overflow-x: auto; Enable horizontal scrolling */
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            /* Smooth scrolling on iOS */
+        }
+
+        .slide {
+            flex: 0 0 calc(25% - 15px);
+            /* 25% width for each slide minus the gap */
+            scroll-snap-align: start;
+            /* Snap behavior */
+            position: relative;
+            margin-right: 15px;
+            /* Right margin to create gap */
+            overflow: hidden;
+            /* Hide overflow for zoom effect */
+            transition: transform 0.3s ease;
+            /* Smooth transition for zoom effect */
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+            /* Smooth transition for zoom effect */
+        }
+
+        .slide:hover img {
+            transform: scale(1.1);
+            /* Zoom in effect on hover */
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 60px;
+            left: 10px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .banner {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            /* Center the banner images */
+            gap: 30px;
+            /* Gap between the banner images */
+            margin-bottom: 30px;
+            /* Bottom margin */
+        }
+
+        .banner img {
+            height: 400px;
+            width: auto;
+            margin-top: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .banner img:hover {
+            transform: scale(1.1);
+        }
+
+        .overlay-banner1 {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            color: white;
+            /* background-color: rgba(0, 0, 0, 0.5); */
+            background-color: #000;
+            padding: 5px 10px;
+            font-size: 28px;
+            font-weight: bold;
+            width:250px;
+        }
+        
+
+        .overlay-banner2 {
+            position: absolute;
+            top: -150px;
+            left: 10%;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5);
+            padding: 5px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            position: relative;
+            left: 100px;
+        }
+
+        .products-section {
+            width: 90%;
+            margin: 0 auto;
+            padding: 40px 0;
+            background-color: #fff;
+        }
+
+        .products-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .products-header h2 {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .products-header p {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .products-menu {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .products-menu button {
+            font-size: 18px;
+            text-decoration: none;
+            color: #000000;
+            padding: 10px 20px;
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+
+        .products-menu button:hover,
+        .products-menu button.active {
+            color: #04d39f;
+        }
+
+        .products-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            width: 23%;
+            background-color: #fff;
+            transition: transform 0.3s;
+            position: relative;
+        }
+
+        .product-card:hover {
+            transform: scale(1.05);
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info button {
+            font-size: 15px;
+            margin-bottom: 10px;
+            background-color: transparent;
+            border: 2px solid transparent;
+            color: black;
+        }
+        .product-info button:hover{
+            color: #04d39f;
+        }
+
+        .product-info p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            font-size: 16px;
+            color: #f5a623;
+        }
+
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: #f8f8f8;
+            border-top: 1px solid #ddd;
+            margin-bottom: 0px;
+        }
+
+        .product-actions img {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .add-to-cart {
+            background-color: #04d39f;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            border:2px solid transparent;
+        }
+
+        .add-to-cart:hover {
+            background-color: #02a37a;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #04d39f;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+        }
+
+        .store {
+            display: flex;
+            position: relative;
+            justify-content: center;
+            /* Center the banner images */
+            gap: 30px;
+            /* Gap between the banner images */
+            margin-bottom: 30px;
+            /* Bottom margin */
+        }
+
+        .store img {
+            height: 400px;
+            width: auto;
+            margin-top: 30px;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .storeinfo {
+            margin-top: 60px;
+            margin-left: 600px;
+        }
+
+        .storeinfo h1 {
+            font-size: 50px;
+        }
+
+        .storeinfo h4 {
+            font-size: 20px;
+            margin-top: -10px;
+            margin-left: 35px;
+            margin-bottom: 20px;
+        }
+
+        .storeinfo a {
+            color: #02a37a;
+        }
+
+        
+
+       /* Style for the "Shop Now" button */
+.slide-button {
+    background-color: #04d39f; /* Green background */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 20px; /* Padding inside the button */
+    text-align: center; /* Center text */
+    text-decoration: none; /* Remove underline from anchor tags */
+    display: none; /* Hide the button initially */
+    position: absolute; /* Position absolute over the image */
+    bottom: 20px; /* Position bottom of the image */
+    right: 20px; /* Position right of the image */
+    font-size: 16px; /* Font size */
+    cursor: pointer; /* Cursor style on hover */
+    border-radius: 5px; /* Rounded corners */
+    transition: opacity 0.3s ease; /* Smooth transition for opacity change */
+}
+
+/* Show the button on hover */
+.slide:hover .slide-button {
+    display: inline-block; /* Display the button on hover */
+    opacity: 1; /* Set opacity to 1 for full visibility */
+}
+
+/* Optional: Adjust margin or padding around the button */
+.slide-button {
+    margin-top: 10px; /* Margin top for spacing */
+}
+.wishlist{
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+.wish-cart{
+    display: flex;
+}
+
+.confirmation-message {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #04d39f;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    opacity: 0;
+    transition: opacity 0.3s, top 0.3s;
+    z-index: 1000;
+}
+
+.confirmation-message.show {
+    top: 40px;
+    opacity: 1;
+}
+.product-info a{
+    color: #000;
+}
+.product-info a:hover{
+    color: #04d39f;
+}
+
+.fa-star {
+    font-size: 20px; /* Adjust as needed */
+    color: #ccc; /* Color for empty stars */
+}
+
+.fa-star.checked {
+    color: #ffcc00; /* Color for filled stars */
+}
+
+.topinteresting{
+    background-color: transparent;
+    border: 2px solid transparent;
+}
+
+
+@media only screen and (max-width: 767px) {
+    /* Your CSS rules here */
+    .slide-container{
+        display: flex;
+        flex-direction: column;
+        margin-left: 16px;
+        column-gap: 20px;
+    }
+    .banner {
+        display: flex;
+        flex-direction: column;
+        gap: 20px; /* Adjust gap between banner images */
+        margin-bottom: 20px; /* Adjust bottom margin */
+    }
+
+    .banner img {
+        width: 100%; /* Ensure images take full width */
+        height: auto; /* Maintain aspect ratio */
+        margin-top:20px; /* Adjust top margin if needed */
+    }
+
+    .overlay-banner1,
+    .overlay-banner2 {
+        font-size: 20px; /* Adjust font size for smaller screens */
+        width: auto; /* Adjust width if necessary */
+        left: 5%; /* Adjust positioning */
+    }
+    .products-grid {
+        flex-direction: column;
+        gap: 40px;
+        padding: 10px;
+    }
+
+    .product-card {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .product-card img {
+        width: 100%;
+        height: auto;
+    }
+    .wish-cart {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.wishlist {
+    background-color: transparent;
+    border: 2px solid transparent;
+    padding: 5px; /* Adjust padding to make button smaller */
+}
+
+.wish-cart img {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px; /* Add margin between the buttons */
+    cursor: pointer;
+}
+
+
+.store {
+        flex-direction: column;
+        gap: 20px; /* Adjust gap between store images */
+        margin-bottom: 20px; /* Adjust bottom margin */
+        padding: 10px;
+    }
+
+    .store img {
+        width: 100%; /* Ensure images take full width */
+        height: auto; /* Maintain aspect ratio */
+        margin-top: 20px; /* Adjust top margin if needed */
+    }
+
+    .storeinfo {
+        margin-top: 30px;
+        margin-left: 0;
+        text-align: center; /* Center align the text */
+    }
+
+    .storeinfo h1 {
+        font-size: 36px; /* Adjust font size */
+    }
+
+    .storeinfo h4 {
+        font-size: 18px; /* Adjust font size */
+        margin: 10px 0; /* Adjust margin */
+    }
+
+    .storeinfo a {
+        color: #02a37a; /* Ensure link color remains the same */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .storeinfo a:hover {
+        text-decoration: underline; /* Underline on hover */
+    }
+
+
+    .products-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .products-menu button {
+        width: 100%;
+        font-size: 16px;
+        padding: 8px 0;
+    }
+    body{
+        overflow-x: hidden;
+        /* margin-left: 20px; */
+    }
+    .slide-container {
+        display: flex;
+        flex-direction: column;
+        margin-left: 16px; /* Adjust as necessary */
+        column-gap: 20px;
+    }
+    /* body{
+        overflow-x: hidden;
+
+    } */
+
+}
+
+    </style>
+</head>
+
+<body>
+    <%- include("partials/header.ejs") %>
+    <div class="slider">
+        <div class="slide-container">
+            <div class="slide">
+                <img src="https://www.bringitonline.in/uploads/2/2/4/5/22456530/professional-product-photography-for-ecommerce-7_orig.jpg"
+                    alt="Image 1">
+                <div class="overlay"><%= mn %> Products<br>Men</div>
+                <form action="/product">
+                <button class="slide-button" type="submit" name="category" value="Men">Shop Now</button>
+            </form>
+            </div>
+            <div class="slide">
+                <img src="https://www.bringitonline.in/uploads/2/2/4/5/22456530/western-wear-photoshoot-saree-bodycon-dress-a-line-dress-wrap-dress-maxi-dress-slip-dress-halter-neck-dress-cocktail-dress-tube-dress-summer-dress-and-asymmetrical-dress-photography-bringitonline-48_1.jpeg"
+                    alt="Image 2">
+                <div class="overlay"><%= won %> Products<br>Women</div>
+                <form action="/product">
+                <button class="slide-button" type="submit" name="category" value="Women">Shop Now</button>
+            </form>
+            </div>
+            <div class="slide">
+                <img src="https://www.bringitonline.in/uploads/2/2/4/5/22456530/whatsapp-image-2023-08-17-at-1-10-51-am_orig.jpeg"
+                    alt="Image 3">
+                <div class="overlay"><%= kn %> Products<br>Kids</div>
+                <form action="/product">
+                <button class="slide-button" type="submit" name="category" value="Kids">Shop Now</button>
+            </form>
+            </div>
+            <div class="slide">
+                <img src="https://www.bringitonline.in/uploads/2/2/4/5/22456530/whatsapp-image-2023-08-17-at-12-16-02-am-1_orig.jpeg"
+                    alt="Image 4">
+                <div class="overlay"><%= fn %> Product<br>Footwear</div>
+                <form action="/product">
+                <button class="slide-button" type="submit" name="category" value="Footwear">Shop Now</button>
+            </form>
+            </div>
+        </div>
+    </div>
+    <div class="banner">
+        <div class="banner-image">
+            <img src="https://media.istockphoto.com/id/1398610798/photo/young-woman-in-linen-shirt-shorts-and-high-heels-pointing-to-the-side-and-talking.jpg?s=612x612&w=0&k=20&c=JULY1xsUtiur9QPMxqrzgC2VbnhuT4dSnHWcpFQnuAQ="
+                alt="" class="banner-img1">
+            <div class="overlay-banner1">GET READY FOR SUMMER 2018</div>
+        </div>
+        <div class="banner-image">
+            <img src="https://media.istockphoto.com/id/1206229550/photo/portrait-of-a-smiling-man-looking-at-the-camera.jpg?s=612x612&w=0&k=20&c=Ph8YpAzzorIDlXmX4NZsuL130NJVZZIFhpcZqhYMbAw="
+                alt="" class="banner-img2">
+            <div class="overlay-banner2">32 Products<br>Men</div>
+        </div>
+    </div>
+
+    <div class="products-section">
+        <div class="products-header">
+            <h1>#Top Interesting</h1>
+            <br>
+            <p>Forget about struggling to do everything at once: taking care of the family, running your business,<br>
+                walking your dog, cleaning the house, doing the shopping, etc.</p>
+        </div>
+        <div class="products-menu">
+
+            <form action="/topinteresting" method="post" >
+            <button class="topinteresting active" name="topinteresting" value="newest">Newest</button>
+            </form>
+            <button class="topinteresting" name="topinteresting" value="featured">Featured</button>
+            <button class="topinteresting" name="topinteresting" value="bestseller">Best Sellers</button>
+            <button class="topinteresting" name="topinteresting" value="onsale">On sale</button>
+            <button class="topinteresting" name="topinteresting" value="Cheapest">Cheapest</button>
+  
+        </div>
+        <div class="products-grid">
+            <% for( let index = 0; index < 4; index++ ) { %>
+            <div class="product-card">
+                <img src="<%= item[index].image %>"
+                    alt="Product Image" class="product-image">
+                <div class="product-info">
+                    <p><%= item[index].category%></p>
+                    <form action="/productinfo" method="post">
+                    <button name="aboutproduct" value="<%= item[index].id %>"><%= item[index].name %></button>
+                   </form>
+                    <br>
+                    <p class="product-price">Rs.<%= item[index].price %></p>
+                    <% for (let i = 1; i <= 5; i++) { %>
+                        <span class="fa fa-star <%= i <= item[index].rating ? 'checked' : '' %>"></span>
+                    <% } %>
+                </div>
+                <div class="product-actions">
+                    <!-- <a href="#" class="add-to-cart">ADD TO CART</a> -->
+                     <form action="/addtocart" method="post">
+                    <button href="#" class="add-to-cart" name="addtocart" value="<%= item[index].id %>">ADD TO CART</button>
+                </form>
+                    
+                    <div class="wish-cart">
+                        <form action="/addtowishlist" method="post">
+                        <button class="wishlist" name="addtowishlist" value="<%= item[index].id %>"><img src="/images/heart.png" alt="Wishlist"></button>
+                    </form>
+                        <img src="/images/grocery-store.png" alt="Share">
+                    </div>
+                </div>
+            </div>
+            <% } %>
+
+        </div>
+
+
+    </div>
+    <div class="storeinfo">
+        <h1>Store Locator</h1>
+        <br>
+        <br>
+        <h4><a href="">Find a Store near you</a></h4>
+    </div>
+    <div class="store">
+        <div class="store-image">
+            <img src="https://www.incu.com/cdn/shop/files/IMG1490_Incu_Galleries_Womens1_S07_188Final_2_1000x.png?v=1678078792"
+                alt="" class="banner-img1">
+        </div>
+        <div class="store-image">
+            <img src="https://www.incu.com/cdn/shop/files/homepage-storeimage-galeries-accessories_1000x.png?v=1678078874"
+                alt="" class="banner-img2">
+        </div>
+    </div>
+    <%- include("partials/footer.ejs") %>
+
+    <script>
+
+    </script>
+</body>
+</html>

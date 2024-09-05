@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Shopping Cart</title>
+    <style>
+        .heading {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .card-head {
+            display: flex;
+            margin-left: 300px;
+        }
+
+        .product {
+            margin-left: 150px;
+        }
+
+        .size {
+            margin-left: 140px;
+        }
+
+        .price {
+            margin-left: 100px;
+        }
+
+        .quantity {
+            margin-left: 100px;
+        }
+
+        .subtotal {
+            margin-left: 100px;
+        }
+
+        .cart-logo {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .cart-card {
+            margin-top: 50px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-product {
+            margin-top: 50px;
+            display: flex;
+            align-items: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cart-img {
+            height: 150px;
+            margin-left: 50px;
+            border-radius: 10px;
+        }
+
+        .product-detail {
+            margin-left: 50px;
+            margin-top: 0px;
+        }
+
+        .product-size {
+            margin-left: 50px;
+            height: 30px;
+        }
+
+        .product-price {
+            margin-left: 60px;
+            margin-top: 0px;
+        }
+
+        .quantity-controls {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-left: 85px;
+            margin-top: -10px;
+        }
+
+        .quantity-controls button {
+            width: 30px;
+            height: 30px;
+            background-color: #f8f8f8;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            text-align: center;
+            line-height: 30px;
+            font-size: 18px;
+        }
+
+        .quantity-controls input {
+            width: 50px;
+            height: 30px;
+            text-align: center;
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            pointer-events: none;
+        }
+
+        .product-subtotal {
+            margin-top: 0px;
+            margin-left: 80px;
+            color: #04d39f;
+        }
+
+        .update {
+            margin-top: 20px;
+            margin-left: 1300px;
+            padding: 10px;
+            background-color: #04d39f;
+            color: white;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .delete {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .right {
+            width: 35%;
+            float: right;
+            margin-top: 35px;
+        }
+        .billing-details label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .billing-details input[type="text"],
+        .billing-details select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        .billing-details input[type="text"]:focus,
+        .billing-details select:focus {
+            border-color: #007bff;
+        }
+        .required {
+            color: red;
+        }
+        .box {
+            border: 1px solid #e6e6e6;
+            padding: 20px;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        .box p {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .subtotal-right {
+            float: right;
+            margin-top: -30px;
+        }
+        hr {
+            border: none;
+            height: 1px;
+            background: #e6e6e6;
+            margin: 10px 0;
+        }
+        .payment {
+            margin-top: 20px;
+        }
+        .upi {
+            width: 100px;
+            height: auto;
+            display: block;
+            margin: 10px auto;
+        }
+        input[type="submit"] {
+            background: #04d39f;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background: #02a37a;
+        }
+        @media (max-width: 768px) {
+            .left, .right {
+                width: 100%;
+                float: none;
+            }
+
+            @media (max-width: 768px) {
+    .card-head {
+      display: none;
+    }
+    .product, .size, .price, .quantity, .subtotal {
+        margin-left: 0;
+        text-align: center;
+    }
+    .cart-product {
+        flex-direction: column;
+        align-items: center;
+        padding: 15px;
+        margin-top: 20px;
+    }
+    .cart-img {
+        margin-left: 0;
+        margin-bottom: 10px;
+    }
+    .product-detail, .product-size, .product-price, .quantity-controls, .product-subtotal {
+        margin-left: 0;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .product-size{
+        margin-top: 20px;
+    }
+    .quantity-controls {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .right {
+        width: 100%;
+        float: none;
+        margin-top: 20px;
+    }
+    .box {
+        padding: 10px;
+    }
+    .subtotal-right {
+        float: none;
+        margin-top: 0;
+        text-align: center;
+    }
+    .update {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .cart-logo{
+        margin-right: 280px;
+        position: relative;
+        top: 80px;
+    }
+}
+
+        }
+    </style>
+</head>
+<body>
+    <%- include("partials/header.ejs") %>
+    <div class="heading">
+        <h1>My Shopping Cart</h1>
+    </div>
+    <div class="cart-card">
+        <div class="card-head">
+            <h3 class="product">Product</h3>
+            <h3 class="size">Size</h3>
+            <h3 class="price">Price</h3>
+            <h3 class="quantity">Quantity</h3>
+            <h3 class="subtotal">Sub Total</h3>
+        </div>
+        <form action="/checkout" method="post">
+        <% for( let index = 0; index < item.length; index++ ) { %>
+        <div class="cart-product">
+            <button class="delete" name="delete" value="<%= item[index].id %>" formaction="/delcart" formmethod="post"><img src="images/delete.png" alt="Delete" class="cart-logo"></button>
+            <img src="<%= item[index].image %>" alt="Product Image" class="cart-img">
+            <h3 class="product-detail"><%= item[index].name %></h3>
+            <select class="product-size" name="size_<%= item[index].id %>" data-id="<%= item[index].id %>">
+                <option value="" selected disabled>Select a Size</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            
+            <h3 class="product-price"><%= item[index].price %></h3>
+            <div class="quantity-controls">
+                <button type="button" class="decrement">-</button>
+                <input type="number" name="quantity_<%= item[index].id %>" value="1" min="1" max="10" readonly>
+                <button type="button" class="increment">+</button>
+            </div>
+            <h3 class="product-subtotal"><%= item[index].price %>.00</h3>
+        </div>
+        <% } %>
+
+        <div class="right">
+            <div class="box">
+                <p class="product-left">Subtotal</p>
+                <p class="subtotal-right total-subtotal">Rs 9.00</p>
+                <hr>
+                <div class="order-summary">
+                    <p class="product-left">Shipping</p>
+                    <p class="subtotal-right">Flat rate</p>
+                    <hr>
+                    <p class="product-left">Total</p>
+                    <p class="subtotal-right total-amount">Rs 9.00</p>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <button class="update" type="submit">Proceed to Checkout</button>
+      </form>
+    </div>
+    <%- include("partials/footer.ejs") %>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            initializeSubtotals();
+            updateTotal();
+        });
+
+        function initializeSubtotals() {
+            document.querySelectorAll('.cart-product').forEach(product => {
+                let productPrice = parseFloat(product.querySelector('.product-price').textContent);
+                let quantityInput = product.querySelector('.quantity-controls input');
+                let subtotalElement = product.querySelector('.product-subtotal');
+                subtotalElement.textContent = (productPrice * quantityInput.value).toFixed(2);
+            });
+        }
+
+        document.querySelectorAll('.increment').forEach(button => {
+            button.addEventListener('click', function() {
+                let quantityInput = this.previousElementSibling;
+                let productPrice = parseFloat(this.closest('.cart-product').querySelector('.product-price').textContent);
+                let subtotalElement = this.closest('.cart-product').querySelector('.product-subtotal');
+                
+                if (quantityInput.value < 10) {
+                    quantityInput.value = parseInt(quantityInput.value) + 1;
+                    subtotalElement.textContent = (productPrice * quantityInput.value).toFixed(2);
+                    updateTotal();
+                }
+            });
+        });
+
+        document.querySelectorAll('.decrement').forEach(button => {
+            button.addEventListener('click', function() {
+                let quantityInput = this.nextElementSibling;
+                let productPrice = parseFloat(this.closest('.cart-product').querySelector('.product-price').textContent);
+                let subtotalElement = this.closest('.cart-product').querySelector('.product-subtotal');
+                
+                if (quantityInput.value > 1) {
+                    quantityInput.value = parseInt(quantityInput.value) - 1;
+                    subtotalElement.textContent = (productPrice * quantityInput.value).toFixed(2);
+                    updateTotal();
+                }
+            });
+        });
+
+        function updateTotal() {
+            let subtotals = document.querySelectorAll('.product-subtotal');
+            let total = 0;
+            subtotals.forEach(subtotal => {
+                total += parseFloat(subtotal.textContent);
+            });
+            document.querySelector('.total-subtotal').textContent = 'Rs ' + total.toFixed(2);
+            document.querySelector('.total-amount').textContent = 'Rs ' + total.toFixed(2);
+        }
+    </script>
+</body>
+</html>

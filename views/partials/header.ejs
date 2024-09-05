@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        .contact {
+            display: flex;
+            align-items: center;
+        }
+
+        .phone-logo {
+            width: 15px;
+            margin-right: 10px;
+        }
+
+        .social {
+            display: flex;
+            gap: 15px;
+            margin-left: 1000px; /* Move social icons to the right */
+        }
+
+        .social img {
+            width: 15px;
+        }
+
+        .signin {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .signin img {
+            width: 15px;
+        }
+
+        .signin a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .header p:hover,
+        .header a:hover {
+            color: #04d39f;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+            background-color: #fff;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 90px;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            padding: 10px 20px;
+            transition: color 0.3s;
+            font-size: 18px;
+        }
+
+        .navbar a:hover {
+            color: #04d39f;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            width: 200px; /* Set your desired width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .navbar .menu {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .icons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .navbar .icons img {
+            width: 25px;
+        }
+
+        .count {
+            position: absolute;
+            top: 15px;
+            right: 200px;
+            background-color: #04d39f;
+            color: white;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20px;
+        }
+
+        .wishlist-count {
+            right: 120px; /* Adjust as needed to position correctly */
+        }
+
+        .cart-count {
+            right: 30px; /* Adjust as needed to position correctly */
+        }
+
+        .searchbar {
+            display: flex;
+            align-items: center;
+        }
+
+        .searchbar input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 20px 0 0 20px;
+            outline: none;
+            width: 250px;
+        }
+
+        .searchbar button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            background-color: #04d39f;
+            color: white;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+        }
+
+        .searchbar button:hover {
+            background-color: #039e7e;
+        }
+
+        /* Suggestions box styling */
+        #suggestions {
+            position: absolute;
+            width: 250px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none;
+            left: 780px;
+            z-index: 1000;
+            
+        }
+
+        #suggestions p {
+            padding: 10px;
+            margin: 0;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #suggestions p:hover {
+            background-color: #f0f0f0;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            margin: 4px 0;
+            transition: 0.4s;
+        }
+        .bottom-nav{
+            display: none;
+        }
+
+        .signin-mobile{
+            display: none;
+        }
+
+        @media only screen and (max-width: 767px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+
+            .header .social {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+
+            .navbar .menu {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                gap: 10px;
+                margin-top: 10px;
+                background-color: white;
+            }
+
+            .navbar .icons {
+                flex-direction: row;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 10px;
+            }
+
+            .navbar .searchbar {
+                width: 100%;
+                margin-top: 10px;
+                justify-content: center;
+            }
+
+            .searchbar input[type="text"] {
+                width: 100%;
+                border-radius: 20px;
+            }
+
+            .searchbar button {
+                border-radius: 20px;
+                margin-left: 10px;
+            }
+
+            #suggestions {
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+            }
+
+            .hamburger {
+                display: flex;
+                margin-top: -60px;
+                margin-left: 350px;
+                background-color: white;
+            }
+            .searchbar{
+                display: none;
+            }
+            .header{
+                display: none;
+            }
+            .icons{
+                visibility: hidden;
+            }
+            .bottom-nav {
+                display: flex;
+                justify-content: space-around;
+                align-items: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                background-color: #fff;
+                border-top: 1px solid #ddd;
+                z-index: 1000;
+                padding: 10px 0;
+            }
+
+            .bottom-nav a {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-decoration: none;
+                color: #333;
+            }
+
+            .bottom-nav img {
+                width: 25px;
+                margin-bottom: 5px;
+            }
+            .count{
+                margin-right: 5px;
+                margin-top: -12px;
+            }
+            .wishlist-count{
+                margin-right: 55px;
+            }
+            
+            .menu .signin-mobile {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            @media only screen and (max-width: 767px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .header .social {
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    .navbar .menu {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+        margin-top: 10px;
+        background-color: white;
+    }
+
+    .navbar .icons {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .navbar .searchbar {
+        width: 100%;
+        margin-top: 10px;
+        justify-content: center;
+    }
+
+    .searchbar input[type="text"] {
+        width: 100%;
+        border-radius: 20px;
+    }
+
+    .searchbar button {
+        border-radius: 20px;
+        margin-left: 10px;
+    }
+
+    #suggestions {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+    }
+
+    .hamburger {
+        display: flex;
+        margin-top: -60px;
+        margin-left: 350px;
+        background-color: white;
+    }
+    .searchbar{
+        display: none;
+    }
+    .header{
+        display: none;
+    }
+    .icons{
+        visibility: hidden;
+    }
+    .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #fff;
+        border-top: 1px solid #ddd;
+        z-index: 1000;
+        padding: 10px 0;
+    }
+
+    .bottom-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .bottom-nav img {
+        width: 25px;
+        margin-bottom: 5px;
+    }
+    .count{
+        margin-right: 5px;
+        margin-top: -12px;
+    }
+    .wishlist-count{
+        margin-right: 55px;
+    }
+    
+    .menu .signin-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="contact">
+            <img class="phone-logo" src="/images/telephone-call.png" alt="Phone Logo">
+            <p class="phoneno">+910123456789</p>
+        </div>
+        <div class="social">
+            <p><a href="#"><img src="/images/facebook-app-symbol.png" alt="Facebook"></a></p>
+            <p><a href="#"><img src="/images/twitter.png" alt="Twitter"></a></p>
+            <p><a href="#"><img src="/images/instagram.png" alt="Instagram"></a></p>
+        </div>
+        <div class="signin">
+            <p><a href="#"><img src="/images/exit.png" alt="Sign In"></a></p>
+            <% if (isAuthenticated) { %>
+                <a href="/logout">Logout</a>
+            <% } else { %>
+                <a href="/login">Sign In</a>
+                <a href="/register">Register</a>
+            <% } %>
+        </div>
+    </div>
+
+    <div class="navbar">
+        <div class="logo"><img src="/images/cover.png" alt="Sundarbans Logo"></div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="menu">
+            <a href="/home">HOME</a>
+            <a href="/shop">SHOP</a>
+            <a href="#">BLOG</a>
+            <!-- <a href="#">SHOP HOVER</a>
+            <a href="#">PAGES</a>
+            <a href="#">ELEMENTS</a> -->
+            <div class="signin-mobile">
+                <% if (isAuthenticated) { %>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">SIGN IN</a>
+                    <a href="/register">REGISTER</a>
+                <% } %>
+            </div>
+        </div>
+        <div class="searchbar">
+            <form action="/searchitem" method="post">
+                <input id="searchInput" type="text" placeholder="Search..." name="searchinput">
+                <button id="searchButton" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="icons">
+            <a href="/search"><img src="/images/search.png" alt="Search"></a>
+            <a href="/wishlist"><img src="/images/heart.png" alt="Wishlist"><span class="count wishlist-count"><%= wn %></span></a>
+            <a href="/cart"><img src="/images/grocery-store.png" alt="Cart"><span class="count cart-count"><%= cn %></span></a>
+        </div>
+    </div>
+
+    <div class="bottom-nav">
+        <a href="/home">
+            <img src="/images/icons8-home-50.png" alt="Home">
+            <span>Home</span>
+        </a>
+        <a href="/wishlist">
+            <img src="/images/heart.png" alt="Wishlist">
+            <span>Wishlist</span>
+            <span class="count wishlist-count"><%= wn %></span>
+        </a>
+        <a href="/cart">
+            <img src="/images/grocery-store.png" alt="Cart">
+            <span>Cart</span>
+            <span class="count cart-count"><%= cn %></span>
+        </a>
+    </div>
+
+    <!-- Suggestions box -->
+    <div id="suggestions"></div>
+
+    <script>
+        async function showSuggestions(value) {
+            const suggestionBox = document.getElementById("suggestions");
+            suggestionBox.innerHTML = '';
+            if (value.trim().length > 0) {
+                const response = await fetch(`/suggestions?q=${encodeURIComponent(value)}`);
+                const suggestions = await response.json();
+                suggestions.forEach(item => {
+                    const suggestionItem = document.createElement("p");
+                    suggestionItem.textContent = item.name;
+                    suggestionItem.onclick = () => {
+                        document.getElementById("searchInput").value = item.name;
+                        suggestionBox.style.display = "none";
+                    };
+                    suggestionBox.appendChild(suggestionItem);
+                });
+                suggestionBox.style.display = suggestions.length ? "block" : "none";
+            } else {
+                suggestionBox.style.display = "none";
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const searchInput = document.getElementById("searchInput");
+            const searchButton = document.getElementById("searchButton");
+            searchInput.addEventListener("input", () => {
+                showSuggestions(searchInput.value);
+            });
+
+            // searchButton.addEventListener("click", (event) => {
+            //     event.preventDefault();
+            //     const searchValue = searchInput.value.trim();
+            //     if (searchValue.length > 0) {
+            //         // Perform search action or redirect to search page
+            //         console.log(`Performing search for: ${searchValue}`);
+            //     }
+            // });
+        });
+
+        document.addEventListener("click", (event) => {
+            const suggestionBox = document.getElementById("suggestions");
+            if (!suggestionBox.contains(event.target) && event.target !== document.getElementById("searchInput")) {
+                suggestionBox.style.display = "none";
+            }
+        });
+
+        function toggleMenu() {
+            const menu = document.querySelector('.navbar .menu');
+            menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>

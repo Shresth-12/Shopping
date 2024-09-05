@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            width: 100%;
+            margin-bottom: 20px;
+            text-align: left; /* Center text on mobile */
+        }
+
+        .footer-section h4 {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .footer-section a {
+            font-size: 14px;
+            text-decoration: none;
+            color: #ccc;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #04d39f;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid #444;
+            margin-top: 40px;
+        }
+
+        .footer-bottom p {
+            font-size: 14px;
+            color: #ccc;
+        }
+
+        .footer-bottom p a {
+            color: #04d39f;
+            text-decoration: none;
+        }
+
+        .footer-bottom p a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-section button {
+            background-color: #04d39f;
+            padding: 10px 20px; /* Increased padding for better touch target */
+            color: white;
+            border: 2px solid transparent;
+            font-size: 14px; /* Adjusted font size */
+            margin-top: 10px; /* Added margin for spacing */
+        }
+
+        .footer-section input {
+            padding: 10px 20px; /* Increased padding for better touch target */
+            color: white;
+            border: 2px solid transparent;
+            font-size: 14px; /* Adjusted font size */
+            margin-top: 10px; /* Added margin for spacing */
+            width: 100%; /* Full width input on mobile */
+        }
+
+        @media screen and (min-width: 768px) {
+            .footer-content {
+                justify-content: space-between; /* Adjust for larger screens */
+            }
+
+            .footer-section {
+                width: 23%; /* Restore original width */
+                text-align: left; /* Adjust alignment */
+            }
+
+            .footer-section button,
+            .footer-section input {
+                width: auto; /* Restore original input/button width */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About Us</h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua.</p>
+                <a href="#">Read More</a>
+            </div>
+            <div class="footer-section">
+                <h4>Customer Service</h4>
+                <a href="#">Contact Us</a>
+                <a href="#">FAQ</a>
+                <a href="#">Shipping & Returns</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <a href="#">Facebook</a>
+                <a href="#">Twitter</a>
+                <a href="#">Instagram</a>
+                <a href="#">LinkedIn</a>
+            </div>
+            <div class="footer-section">
+                <h4>Newsletter</h4>
+                <p>Subscribe to our newsletter to get the latest updates and offers.</p>
+                <form>
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; Sundarbans@2024. All Rights Reserved. <a href="#">Terms of Service</a> | <a href="#">Privacy
+                    Policy</a></p>
+        </div>
+    </div>
+</body>
+</html>
